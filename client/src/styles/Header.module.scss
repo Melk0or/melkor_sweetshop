@@ -1,0 +1,46 @@
+.header {
+  font-family: "Yesteryear", cursive;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 5px;
+
+  .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .cartlogo {
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 40px;
+    }
+
+    span {
+      font-family: "Vollkorn", serif;
+      font-size: 25px;
+    }
+  }
+  .rightSide {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    a {
+      font-weight: 700;
+      font-size: 25px;
+    }
+  }
+
+  img {
+    width: 70px;
+  }
+
+  h3 {
+    font-size: 40px;
+  }
+}

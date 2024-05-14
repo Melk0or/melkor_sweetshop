@@ -1,0 +1,27 @@
+.root {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.mainRoot {
+  padding: 0 20px;
+
+  button {
+    margin: 20px 0;
+    background-color: rgba(0, 0, 0, 0);
+    padding: 10px 20px;
+    border: 1px solid #64fd;
+    color: #64fd;
+    border-radius: 20px;
+    outline: none;
+    transition: .4s ease-in;
+
+    &:hover {
+      color: #fff;
+      background-color: #64fd;
+      filter: drop-shadow(1px 1px 8px #535bf2);
+    }
+  }
+}

@@ -1,0 +1,40 @@
+.categories {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-width: 1000px;
+    margin: 0 auto;
+
+}
+
+.root{
+    h2 {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+}
+
+.category {
+    flex: 1 1 200px;
+    text-align: center;
+
+
+    a {
+        display: block;
+        padding: 10px 20px;
+        border: 1px solid #64fd;
+        border-radius: 20px;
+
+        &:hover {
+            color: #fff;
+            background-color: #64fd;
+
+            &::after {
+                width: 0%;
+            }
+        }
+    }
+
+
+}
