@@ -15,10 +15,10 @@ const Header = () => {
       <div className={styles.rightSide}>
       <Link to='/cart/' className={styles.cartlogo}>
           <img src={cartLogo} alt="cart"/>
-          <span>{cartTotal.totalPrice} ₽</span>
+          <span>{cartTotal.totalPrice} <span>₽</span></span>
       </Link>
       <Link to="/" onClick={() => localStorage.removeItem("access-token")}>
-        Выход
+        Exit
       </Link>
       </div>
       

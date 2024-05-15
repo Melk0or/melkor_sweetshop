@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getMainItemsCardSelector, setProduct } from '@/redux/slices/card.slice'
 import { useQuery } from '@tanstack/react-query';
 import { IProduct } from '../index.lazy';
+import { useLoadProducts } from '@/hooks/useLoadProducts';
 
 type TGetData = (url: string) => Promise<void | { productList: IProduct[] }>;
 
@@ -39,7 +40,7 @@ const Catalog = () => {
       if ('productList' in d) {
         localStorage.setItem('products', JSON.stringify(d));
         setCat = Array.from(new Set((d.productList.map(item => item.category))))
-        dispatch(setProduct(d));
+        useLoadProducts();
       }
       return d;
     }

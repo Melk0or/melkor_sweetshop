@@ -17,12 +17,16 @@
     align-items: center;
 
     img {
-      width: 40px;
+      width: 35px;
+      transform: translateY(-5px);
     }
 
     span {
-      font-family: "Vollkorn", serif;
       font-size: 25px;
+      span {
+        font-family: "Vollkorn", serif;
+        font-size: 20px;
+      }
     }
   }
   .rightSide {

@@ -1,7 +1,74 @@
 .card {
-    flex: 1 1 300px;
+  padding: 15px;
+  margin-bottom: 40px;
+  flex: 1 1 300px;
+  width: 300px;
+  border-radius: 40px;
+  max-width: 500px;
+  transition: 0.3s ease-in-out;
 
+  &:hover {
+      transform: translateY(-5px);
+  }
+
+  a:hover::after {
+      width: 0;
+  }
+
+  .img {
+      cursor: pointer;
     img {
-        width: 300px;
+        width: 100%;
+        border-radius: 20px;
     }
+  }
+
+  .info {
+    .desc {
+        position: relative;
+        display: block;
+        font-size: 14px;
+        height: 45px;
+      
+       &:after {
+           content: "";
+           position: absolute;
+           width: 100%;
+           height: 100%;
+           bottom: 0;
+           right: 0;
+           z-index: 1;
+           background: linear-gradient(to right, #24242400, #242424);
+  
+       }
+    }
+    h5 {
+        font-size: 20px;
+    }
+  }
+}
+
+
+.priceBLock {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+
+        button {
+            padding: 10px;
+            min-width: 50px;
+            height: 40px;
+            margin: 0;
+            border: 1px solid #64fd;
+    
+        }
+    }
+    
 }
