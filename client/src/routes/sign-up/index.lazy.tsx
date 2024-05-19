@@ -3,6 +3,7 @@ import signUpPageStyle from "@/styles/SigInPage.module.scss";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { TPostData, TSignProps } from "../index.lazy";
+import { useEffect, useState } from "react";
 
 interface IInput {
   username: string;
@@ -13,10 +14,18 @@ const SignUpPage = () => {
   const navigate = useNavigate({ from: "/sign-up" });
 
   
-  if (localStorage.getItem("access-token") && localStorage.getItem("access-token") !== "undefined" && localStorage.getItem("access-token") !== "") {
-    navigate({to: "/catalog/"})
-  }
-
+  const [isExistAT, setISExistAT] = useState<boolean>(false);
+  
+  useEffect(() => {
+    if (
+      localStorage.getItem("access-token") &&
+      localStorage.getItem("access-token") !== "undefined" &&
+      localStorage.getItem("access-token") !== ""
+    ) {
+      navigate({ to: "/catalog/" });
+    }
+  }, [isExistAT])
+  
   const postData: TPostData = async (url, obj) => {
     const headers = new Headers();
     headers.set("Content-Type", "application/json");
@@ -38,8 +47,16 @@ const SignUpPage = () => {
     //   await client.invalidateQueries({ queryKey: ["session"] });
     // },
     onSuccess(d) {
-      console.log(d);
-      navigate({ to: "/catalog/" });
+      if (
+        (d.jwt !== "none" &&
+          (!localStorage.getItem("access-token") ||
+            localStorage.getItem("access-token") === "undefined")) ||
+        localStorage.getItem("access-token") === ""
+      ) {
+        localStorage.setItem("access-token", d.jwt);
+        setISExistAT(prevState => !prevState);
+        console.log(d.jwt, "ddd");
+      }
     },
   });
 
@@ -53,8 +70,8 @@ const SignUpPage = () => {
         className={signUpPageStyle.form}
         onSubmit={handleSubmit(submitData)}
       >
-        <h1>Регистрацияя</h1>
-        {mutation.error && <h5>Врон логин или пассворд</h5>}
+        <h1>Регистрация</h1>
+        {mutation.error && <h5>Чел с таким логином или фио уже существует</h5>}
         {/* <label htmlFor="loginField">Логин</label> */}
         <input
           id="loginField"

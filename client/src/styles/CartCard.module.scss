@@ -1,0 +1,45 @@
+.root {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    align-items: center;
+    width: 100%;
+    img {
+        width: 100px;
+        border-radius: 20px;
+    }
+
+    h5 {
+        font-size: 25px;
+        width: 40%;
+    }
+
+    button {
+        margin: 20px 0;
+        background-color: rgba(0, 0, 0, 0);
+        padding: 10px 20px;
+        border: 1px solid #64fd;
+        color: #535bf2;
+        border-radius: 20px;
+        outline: none;
+        transition: .4s ease-in;
+    
+        &:hover {
+          color: #fff;
+          background-color: #64fd;
+          filter: drop-shadow(1px 1px 8px #535bf2);
+        }
+      }
+
+      span {
+          font-size: 20px;
+      }
+    
+
+      .buttons {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 10px;
+      }
+}

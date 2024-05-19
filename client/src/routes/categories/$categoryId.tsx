@@ -1,23 +1,23 @@
 import Card from "@/components/Card";
 import { getMainItemsCardSelector } from "@/redux/slices/card.slice";
-import {
-  createFileRoute,
-  useNavigate,
-} from "@tanstack/react-router";
-import { useSelector } from "react-redux";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "@/styles/Category.module.scss";
 import { useLoadProducts } from "@/hooks/useLoadProducts";
+import { AppDispatch } from "@/redux/store";
 
 export const Route = createFileRoute("/categories/$categoryId")({
   component: Category,
 });
 
 function Category() {
-  const { categoryId } = Route.useParams();
+  const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const st = useSelector(getMainItemsCardSelector);
 
-  if (st.length < 1) useLoadProducts();
+  const { categoryId } = Route.useParams();
+
+  useLoadProducts(st, dispatch);
   // st.filter()
   const newList = Array.from(
     new Set(
@@ -29,10 +29,13 @@ function Category() {
   console.log(newList);
   return (
     <div className={styles.mainRoot}>
-      <button onClick={() => navigate({ to: "/catalog/" })}>{"Назад"}</button>
+      <div className={styles.title}>
+        <button onClick={() => navigate({ to: "/catalog/" })}>{"Назад"}</button>
+        <h1>{categoryId}</h1>
+      </div>
       <div className={styles.root}>
         {newList.map((item, index) => (
-          <Card props={item} key={index} />
+          <Card cardProps={item} key={index} />
         ))}
       </div>
     </div>

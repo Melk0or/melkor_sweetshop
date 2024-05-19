@@ -3,6 +3,7 @@ import signUpPageStyle from "@/styles/SigInPage.module.scss";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { TPostData, TSignProps } from "../index.lazy";
+import { useEffect, useState } from "react";
 
 interface IInput {
   username: string;
@@ -11,14 +12,19 @@ interface IInput {
 
 const SignInPage = () => {
   const navigate = useNavigate({ from: "/sign-in" });
+  const [isExistAT, setISExistAT] = useState<boolean>(false);
+  
+  useEffect(() => {
+    if (
+      localStorage.getItem("access-token") &&
+      localStorage.getItem("access-token") !== "undefined" &&
+      localStorage.getItem("access-token") !== ""
+    ) {
+      navigate({ to: "/catalog/" });
+    }
+  }, [isExistAT])
 
-  if (
-    localStorage.getItem("access-token") &&
-    localStorage.getItem("access-token") !== "undefined" &&
-    localStorage.getItem("access-token") !== ""
-  ) {
-    navigate({ to: "/catalog/" });
-  }
+ 
 
   const postData: TPostData = async (url, obj) => {
     const headers = new Headers();
@@ -33,6 +39,7 @@ const SignInPage = () => {
   };
 
   const { register, handleSubmit } = useForm<IInput>();
+
   const mutation = useMutation({
     mutationFn: ({ url, obj }: TSignProps) => {
       return postData(url, obj);
@@ -48,6 +55,7 @@ const SignInPage = () => {
         localStorage.getItem("access-token") === ""
       ) {
         localStorage.setItem("access-token", d.jwt);
+        setISExistAT(prevState => !prevState);
         console.log(d.jwt, "ddd");
       }
     },
@@ -64,7 +72,7 @@ const SignInPage = () => {
         onSubmit={handleSubmit(submitData)}
       >
         <h1>Вход</h1>
-        {mutation.error && <h5>Чел с таким логином или фио уже существует</h5>}
+        {mutation.error && <h5>Вронг пэссворд ор логин</h5>}
         {/* <label htmlFor="loginField">Логин</label> */}
         <input
           id="loginField"
